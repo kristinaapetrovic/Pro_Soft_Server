@@ -78,27 +78,39 @@ public class ObradaKlijentskihZahteva extends Thread {
                     ucitajSponzore(request, response);
                     break;
                 }
-                case komunikacija.Operacija.UCITAJ_MENADZERE_FILTER:{
+                case komunikacija.Operacija.UCITAJ_MENADZERE_FILTER: {
                     ucitajMenadzereFilter(request, response);
                     break;
-                } 
-                case komunikacija.Operacija.UCITAJ_MESTA_FILTER:{
+                }
+                case komunikacija.Operacija.UCITAJ_MESTA_FILTER: {
                     ucitajMestaFilter(request, response);
                     break;
                 }
-                case komunikacija.Operacija.UCITAJ_SPONZOR_FILTER:{
+                case komunikacija.Operacija.UCITAJ_SPONZOR_FILTER: {
                     ucitajSponzorFilter(request, response);
                     break;
                 }
-                case komunikacija.Operacija.UCITAJ_SS_FILTER:{
+                case komunikacija.Operacija.UCITAJ_SS_FILTER: {
                     ucitajSSFilter(request, response);
                     break;
                 }
-                case komunikacija.Operacija.UCITAJ_VAKT_FILTER:{
+                case komunikacija.Operacija.UCITAJ_VAKT_FILTER: {
                     ucitajVAFilter(request, response);
                     break;
                 }
-                
+                case komunikacija.Operacija.KREIRAJ_MESTO: {
+                    kreirajMesto(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_MESTO:{
+                    obrisiMesto(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.PROMENI_MESTO:{
+                    promeniMesto(request, response);
+                    break;
+                }
+
                 default:
                     System.out.println("GRESKA, OPERACIJA NE POSTOJI");
 
@@ -120,7 +132,7 @@ public class ObradaKlijentskihZahteva extends Thread {
         try {
             menadzer = Controller.getInstance().prijava(menadzer);
         } catch (Exception ex) {
-          
+
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.setOdgovor(menadzer);
@@ -202,7 +214,7 @@ public class ObradaKlijentskihZahteva extends Thread {
     private void ucitajSponzore(Request request, Response response) {
         List<Sponzor> lista = new ArrayList<>();
         try {
-            lista=Controller.getInstance().vratiListuSviSponzor();
+            lista = Controller.getInstance().vratiListuSviSponzor();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -210,66 +222,90 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void ucitajMenadzereFilter(Request request, Response response) {
-        List<Menadzer> lista=new ArrayList<>();
-        
+        List<Menadzer> lista = new ArrayList<>();
+
         try {
-            lista=Controller.getInstance().vratiListuMenadzer((Menadzer) request.getParametar());
+            lista = Controller.getInstance().vratiListuMenadzer((Menadzer) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         response.setOdgovor(lista);
-        
+
     }
 
     private void ucitajMestaFilter(Request request, Response response) {
-        List <Mesto> lista=new ArrayList<>();
-        
+        List<Mesto> lista = new ArrayList<>();
+
         try {
-            lista=Controller.getInstance().vratiListuMesto((Mesto) request.getParametar());
+            lista = Controller.getInstance().vratiListuMesto((Mesto) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         response.setOdgovor(lista);
     }
 
     private void ucitajSponzorFilter(Request request, Response response) {
-        List<Sponzor> lista=new ArrayList<>();
-        
+        List<Sponzor> lista = new ArrayList<>();
+
         try {
-            lista=Controller.getInstance().vratiListuSponzor((Sponzor) request.getParametar());
+            lista = Controller.getInstance().vratiListuSponzor((Sponzor) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         response.setOdgovor(lista);
     }
 
     private void ucitajSSFilter(Request request, Response response) {
-        List<StrucnaSprema> lista=new ArrayList<>();
-        
+        List<StrucnaSprema> lista = new ArrayList<>();
+
         try {
-            lista=Controller.getInstance().vratiListuStrucnaSprema((StrucnaSprema) request.getParametar());
+            lista = Controller.getInstance().vratiListuStrucnaSprema((StrucnaSprema) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         response.setOdgovor(lista);
     }
 
     private void ucitajVAFilter(Request request, Response response) {
-        List<VrstaAktivnosti> lista=new ArrayList<>();
-        
+        List<VrstaAktivnosti> lista = new ArrayList<>();
+
         try {
-            lista=Controller.getInstance().vratiListuVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+            lista = Controller.getInstance().vratiListuVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         response.setOdgovor(lista);
     }
 
-    
+    private void kreirajMesto(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajMesto((Mesto) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void obrisiMesto(Request request, Response response) {
+        try {
+            Controller.getInstance().obrisiMesto((Mesto) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void promeniMesto(Request request, Response response) {
+        try {
+            Controller.getInstance().promeniMesto((Mesto) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
 
 }

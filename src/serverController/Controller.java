@@ -12,7 +12,10 @@ import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
+import operacija.KreirajMesto;
+import operacija.ObrisiMesto;
 import operacija.PrijavaOperacija;
+import operacija.PromeniMesto;
 import operacija.VratiListuMSS;
 import operacija.VratiListuMenadzer;
 import operacija.VratiListuMesto;
@@ -125,5 +128,21 @@ public class Controller {
         operacija.izvrsi(vrstaAktivnosti, null);
         return operacija.getLista();
     }
+
+    public void kreirajMesto(Mesto mesto) throws Exception {
+        KreirajMesto operacija=new KreirajMesto();
+        operacija.izvrsi(mesto, null);
+    }
+
+    public void obrisiMesto(Mesto mesto) throws Exception {
+        ObrisiMesto operacija=new ObrisiMesto(mesto);
+        operacija.izvrsi(mesto, null);
+    }
+
+    public void promeniMesto(Mesto mesto) throws Exception {
+        PromeniMesto operacija=new PromeniMesto(mesto);
+        operacija.izvrsi(mesto, null);
+    }
+    
 
 }
