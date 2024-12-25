@@ -4,23 +4,30 @@
  */
 package operacija;
 
-import model.Mesto;
+import model.Sponzor;
 
 /**
  *
  * @author Korisnik
  */
-public class ObrisiMesto extends ApstraktnaGenerickaOperacija{
+public class KreirajSponzor extends ApstraktnaGenerickaOperacija {
+
     
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-  
+        if (broker.existsInBD(objekat) && !broker.isDeleted(objekat)) {
+            throw new Exception("Vec postoji objekat");
+        }
     }
 
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
-        broker.delete(objekat);
+        if (broker.isDeleted(objekat)) {
+            broker.edit(objekat);
+        } else {
+            broker.add(objekat);
+        }
     }
-    
+
 }

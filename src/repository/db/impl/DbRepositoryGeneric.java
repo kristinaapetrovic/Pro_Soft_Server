@@ -105,6 +105,7 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
         try {
             st = con.getConnection().createStatement();
             String upit = "UPDATE " + param.vratiImeKlase() + " SET " + param.obrazacZaBrisanje() + " WHERE " + param.vratiUslovZaNadjiSlog();
+            
             st.executeUpdate(upit);
             st.close();
 

@@ -13,9 +13,12 @@ import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
 import operacija.KreirajMesto;
+import operacija.KreirajSponzor;
 import operacija.ObrisiMesto;
+import operacija.ObrisiSponzor;
 import operacija.PrijavaOperacija;
 import operacija.PromeniMesto;
+import operacija.PromeniSponzor;
 import operacija.VratiListuMSS;
 import operacija.VratiListuMenadzer;
 import operacija.VratiListuMesto;
@@ -92,57 +95,73 @@ public class Controller {
     }
 
     public List<Sponzor> vratiListuSviSponzor() throws Exception {
-        VratiListuSviSponzor operacija=new VratiListuSviSponzor();
+        VratiListuSviSponzor operacija = new VratiListuSviSponzor();
         operacija.izvrsi(new Sponzor(), null);
         return operacija.getLista();
     }
 
     public List<Menadzer> vratiListuMenadzer(Menadzer menadzer) throws Exception {
-        VratiListuMenadzer operacija=new VratiListuMenadzer(menadzer);
-        
+        VratiListuMenadzer operacija = new VratiListuMenadzer(menadzer);
+
         operacija.izvrsi(menadzer, null);
-        
+
         return operacija.getLista();
     }
 
     public List<Mesto> vratiListuMesto(Mesto mesto) throws Exception {
-        VratiListuMesto operacija=new VratiListuMesto(mesto);
+        VratiListuMesto operacija = new VratiListuMesto(mesto);
         operacija.izvrsi(mesto, null);
         return operacija.getLista();
     }
 
     public List<Sponzor> vratiListuSponzor(Sponzor sponzor) throws Exception {
-        VratiListuSponzor operacija=new VratiListuSponzor(sponzor);
+        VratiListuSponzor operacija = new VratiListuSponzor(sponzor);
         operacija.izvrsi(sponzor, null);
         return operacija.getLista();
     }
 
     public List<StrucnaSprema> vratiListuStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
-        VratiListuStrucnaSprema operacija=new VratiListuStrucnaSprema(strucnaSprema);
+        VratiListuStrucnaSprema operacija = new VratiListuStrucnaSprema(strucnaSprema);
         operacija.izvrsi(strucnaSprema, null);
         return operacija.getLista();
     }
 
     public List<VrstaAktivnosti> vratiListuVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
-        VratiListuVrstaAktivnosti operacija=new VratiListuVrstaAktivnosti(vrstaAktivnosti);
+        VratiListuVrstaAktivnosti operacija = new VratiListuVrstaAktivnosti(vrstaAktivnosti);
         operacija.izvrsi(vrstaAktivnosti, null);
         return operacija.getLista();
     }
 
     public void kreirajMesto(Mesto mesto) throws Exception {
-        KreirajMesto operacija=new KreirajMesto();
+        KreirajMesto operacija = new KreirajMesto();
         operacija.izvrsi(mesto, null);
     }
 
     public void obrisiMesto(Mesto mesto) throws Exception {
-        ObrisiMesto operacija=new ObrisiMesto(mesto);
+        ObrisiMesto operacija = new ObrisiMesto();
         operacija.izvrsi(mesto, null);
     }
 
     public void promeniMesto(Mesto mesto) throws Exception {
-        PromeniMesto operacija=new PromeniMesto(mesto);
+        PromeniMesto operacija = new PromeniMesto();
         operacija.izvrsi(mesto, null);
     }
-    
+
+    public void kreirajSponzor(Sponzor sponzor) throws Exception {
+        KreirajSponzor operacija = new KreirajSponzor();
+        operacija.izvrsi(sponzor, null);
+    }
+
+    public void obrisiSponzor(Sponzor sponzor) throws Exception {
+
+        ObrisiSponzor operacija = new ObrisiSponzor();
+        operacija.izvrsi(sponzor, null);
+
+    }
+
+    public void promeniSponzor(Sponzor sponzor) throws Exception {
+        PromeniSponzor operacija=new PromeniSponzor();
+        operacija.izvrsi(sponzor, null);
+    }
 
 }

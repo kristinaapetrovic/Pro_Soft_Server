@@ -4,23 +4,20 @@
  */
 package operacija;
 
-import model.Mesto;
-
 /**
  *
  * @author Korisnik
  */
-public class ObrisiMesto extends ApstraktnaGenerickaOperacija{
-    
+public class PromeniSponzor extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-  
+   
     }
 
     @Override
     protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
-        broker.delete(objekat);
+        broker.edit(objekat);
     }
     
 }

@@ -110,6 +110,18 @@ public class ObradaKlijentskihZahteva extends Thread {
                     promeniMesto(request, response);
                     break;
                 }
+                case komunikacija.Operacija.KREIRAJ_SPONZOR:{
+                    kreirajSponzor(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_SPONZOR:{
+                    obrisiSponzor(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.PROMENI_SPONZOR:{
+                    promeniSponzor(request, response);
+                    break;
+                }
 
                 default:
                     System.out.println("GRESKA, OPERACIJA NE POSTOJI");
@@ -302,6 +314,35 @@ public class ObradaKlijentskihZahteva extends Thread {
     private void promeniMesto(Request request, Response response) {
         try {
             Controller.getInstance().promeniMesto((Mesto) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void kreirajSponzor(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajSponzor((Sponzor) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void obrisiSponzor(Request request, Response response) {
+        
+        try {
+            Controller.getInstance().obrisiSponzor((Sponzor) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+         
+        }
+        
+    }
+
+    private void promeniSponzor(Request request, Response response) {
+        try {
+            Controller.getInstance().promeniSponzor((Sponzor) request.getParametar());
         } catch (Exception ex) {
             response.setExc(ex);
         }

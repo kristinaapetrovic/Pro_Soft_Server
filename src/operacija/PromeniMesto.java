@@ -11,11 +11,7 @@ import model.Mesto;
  * @author Korisnik
  */
 public class PromeniMesto extends ApstraktnaGenerickaOperacija{
-    Mesto mesto;
-
-    public PromeniMesto(Mesto mesto) {
-        this.mesto = mesto;
-    }
+ 
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
