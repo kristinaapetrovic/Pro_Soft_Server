@@ -12,6 +12,8 @@ import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
+import operacija.menadzer.KreirajMenadzer;
+import operacija.menadzer.ObrisiMenadzer;
 import operacija.mesto.KreirajMesto;
 import operacija.sponzor.KreirajSponzor;
 import operacija.vrstaaktivnosti.KreirajVrstaAktivnosti;
@@ -20,6 +22,7 @@ import operacija.sponzor.ObrisiSponzor;
 import operacija.strucnasprema.ObrisiStrucnaSprema;
 import operacija.vrstaaktivnosti.ObrisiVrstaAktivnosti;
 import operacija.menadzer.PrijavaOperacija;
+import operacija.menadzer.PromeniMenadzer;
 import operacija.mesto.PromeniMesto;
 import operacija.sponzor.PromeniSponzor;
 import operacija.strucnasprema.PromeniStrucnaSprema;
@@ -32,6 +35,8 @@ import operacija.sponzor.VratiListuSponzor;
 import operacija.strucnasprema.VratiListuStrucnaSprema;
 import operacija.menadzer.VratiListuSviMenadzer;
 import operacija.mesto.VratiListuSviMesto;
+import operacija.mss.KreirajMSS;
+import operacija.mss.ObrisiMSS;
 import operacija.projekat.VratiListuSviProjekat;
 import operacija.sponzor.VratiListuSviSponzor;
 import operacija.strucnasprema.VratiListuSviStrucnaSprema;
@@ -199,5 +204,33 @@ public class Controller {
         KreirajVrstaAktivnosti operacija= new KreirajVrstaAktivnosti();
         operacija.izvrsi(vrstaAktivnosti, null);
     }
+
+    public void kreirajMSS(MSS mss) throws Exception {
+        KreirajMSS operacija=new KreirajMSS();
+        operacija.izvrsi(mss, null);
+    }
+
+    public void obrisiMSS(MSS mss) throws Exception {
+        ObrisiMSS operacija=new ObrisiMSS();
+        operacija.izvrsi(mss, null);
+    }
+
+    public void obrisiMenadzer(Menadzer menadzer) throws Exception {
+        ObrisiMenadzer operacija=new ObrisiMenadzer();
+        operacija.izvrsi(menadzer, null);
+    }
+
+    public void promeniMenadzer(Menadzer menadzer) throws Exception {
+        PromeniMenadzer operacija=new PromeniMenadzer();
+        operacija.izvrsi(menadzer, null);
+    }
+
+    public Menadzer kreirajMenadzer(Menadzer menadzer) throws Exception {
+        KreirajMenadzer operacija=new KreirajMenadzer();
+        operacija.izvrsi(menadzer, null);
+        return operacija.getMenadzer();
+    }
+
+    
 
 }

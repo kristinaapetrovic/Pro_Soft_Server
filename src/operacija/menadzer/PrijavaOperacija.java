@@ -33,7 +33,7 @@ public class PrijavaOperacija extends ApstraktnaGenerickaOperacija {
         for(Menadzer men:lista){
             if(men.isAktivanNalog() && men.getEmail().equals(((Menadzer)objekat).getEmail()) && men.getLozinka().equals(((Menadzer)objekat).getLozinka())){
                 ulogovani=men;
-                System.out.println(ulogovani.toString());
+                System.out.println(ulogovani.toString()+" "+ulogovani.getDatumRodjenja());
                 return;
             }
         }

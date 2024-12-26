@@ -4,12 +4,16 @@
  */
 package niti;
 
+import email.EmailPoruka;
 import java.io.IOException;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
@@ -145,6 +149,25 @@ public class ObradaKlijentskihZahteva extends Thread {
                 case komunikacija.Operacija.KREIRAJ_VRSTA_AKTIVNOSTI:{
                     kreirajVrstaAktivnosti(request, response);
                     break;
+                }
+                case komunikacija.Operacija.KREIRAJ_MSS:{
+                    kreirajMSS(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_MSS:{
+                    obrisiMSS(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_MENADZER:{
+                    obrisiMenadzer(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.PROMENI_MENADZER:{
+                    promeniMenadzer(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.KREIRAJ_MENADZER:{
+                    kreirajMenadzer(request, response);
                 }
 
                 default:
@@ -424,6 +447,53 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
+    }
+
+    private void kreirajMSS(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajMSS((MSS) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void obrisiMSS(Request request, Response response) {
+        try {
+            Controller.getInstance().obrisiMSS((MSS) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void obrisiMenadzer(Request request, Response response) {
+        try {
+            Controller.getInstance().obrisiMenadzer((Menadzer) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void promeniMenadzer(Request request, Response response) {
+        try {
+            Controller.getInstance().promeniMenadzer((Menadzer) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void kreirajMenadzer(Request request, Response response) {
+        Menadzer menadzer = (Menadzer) request.getParametar();
+        Menadzer men = null;
+        try {
+            men = Controller.getInstance().kreirajMenadzer(menadzer);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        response.setOdgovor(men);
+          
+        
     }
 
 }
