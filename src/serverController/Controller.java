@@ -12,25 +12,31 @@ import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
-import operacija.KreirajMesto;
-import operacija.KreirajSponzor;
-import operacija.ObrisiMesto;
-import operacija.ObrisiSponzor;
-import operacija.PrijavaOperacija;
-import operacija.PromeniMesto;
-import operacija.PromeniSponzor;
-import operacija.VratiListuMSS;
-import operacija.VratiListuMenadzer;
-import operacija.VratiListuMesto;
-import operacija.VratiListuSponzor;
-import operacija.VratiListuStrucnaSprema;
-import operacija.VratiListuSviMenadzer;
-import operacija.VratiListuSviMesto;
-import operacija.VratiListuSviProjekat;
-import operacija.VratiListuSviSponzor;
-import operacija.VratiListuSviStrucnaSprema;
-import operacija.VratiListuSviVrstaAktivnosti;
-import operacija.VratiListuVrstaAktivnosti;
+import operacija.mesto.KreirajMesto;
+import operacija.sponzor.KreirajSponzor;
+import operacija.vrstaaktivnosti.KreirajVrstaAktivnosti;
+import operacija.mesto.ObrisiMesto;
+import operacija.sponzor.ObrisiSponzor;
+import operacija.strucnasprema.ObrisiStrucnaSprema;
+import operacija.vrstaaktivnosti.ObrisiVrstaAktivnosti;
+import operacija.menadzer.PrijavaOperacija;
+import operacija.mesto.PromeniMesto;
+import operacija.sponzor.PromeniSponzor;
+import operacija.strucnasprema.PromeniStrucnaSprema;
+import operacija.vrstaaktivnosti.PromeniVrstaAktivnosti;
+import operacija.strucnasprema.UbaciStrucnaSprema;
+import operacija.mss.VratiListuMSS;
+import operacija.menadzer.VratiListuMenadzer;
+import operacija.mesto.VratiListuMesto;
+import operacija.sponzor.VratiListuSponzor;
+import operacija.strucnasprema.VratiListuStrucnaSprema;
+import operacija.menadzer.VratiListuSviMenadzer;
+import operacija.mesto.VratiListuSviMesto;
+import operacija.projekat.VratiListuSviProjekat;
+import operacija.sponzor.VratiListuSviSponzor;
+import operacija.strucnasprema.VratiListuSviStrucnaSprema;
+import operacija.vrstaaktivnosti.VratiListuSviVrstaAktivnosti;
+import operacija.vrstaaktivnosti.VratiListuVrstaAktivnosti;
 
 /**
  *
@@ -162,6 +168,36 @@ public class Controller {
     public void promeniSponzor(Sponzor sponzor) throws Exception {
         PromeniSponzor operacija=new PromeniSponzor();
         operacija.izvrsi(sponzor, null);
+    }
+
+    public void promeniStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
+        PromeniStrucnaSprema operacija=new PromeniStrucnaSprema();
+        operacija.izvrsi(strucnaSprema, null);
+    }
+
+    public void obrisiStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
+        ObrisiStrucnaSprema operacija=new ObrisiStrucnaSprema();
+        operacija.izvrsi(strucnaSprema, null);
+    }
+
+    public void ubaciStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
+        UbaciStrucnaSprema operacija=new UbaciStrucnaSprema();
+        operacija.izvrsi(strucnaSprema, null);
+    }
+
+    public void promeniVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
+        PromeniVrstaAktivnosti operacija=new PromeniVrstaAktivnosti();
+        operacija.izvrsi(vrstaAktivnosti, null);
+    }
+
+    public void obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
+        ObrisiVrstaAktivnosti operacija = new ObrisiVrstaAktivnosti();
+        operacija.izvrsi(vrstaAktivnosti, null);
+    }
+
+    public void kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
+        KreirajVrstaAktivnosti operacija= new KreirajVrstaAktivnosti();
+        operacija.izvrsi(vrstaAktivnosti, null);
     }
 
 }

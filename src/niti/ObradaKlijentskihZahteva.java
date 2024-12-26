@@ -122,6 +122,30 @@ public class ObradaKlijentskihZahteva extends Thread {
                     promeniSponzor(request, response);
                     break;
                 }
+                case komunikacija.Operacija.PROMENI_STRUCNA_SPREMA:{
+                    promeniStrucnaSprema(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_STRUCNA_SPREMA:{
+                    obrisiStrucnaSprema(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.UBACI_STRUCNA_SPREMA:{
+                    ubaciStrucnaSprema(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.PROMENI_VRSTA_AKTIVNOSTI:{
+                    promeniVrstaAktivnosti(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.OBRISI_VRSTA_AKTIVNOSTI:{
+                    obrisiVrstaAktivnosti(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.KREIRAJ_VRSTA_AKTIVNOSTI:{
+                    kreirajVrstaAktivnosti(request, response);
+                    break;
+                }
 
                 default:
                     System.out.println("GRESKA, OPERACIJA NE POSTOJI");
@@ -347,6 +371,59 @@ public class ObradaKlijentskihZahteva extends Thread {
             response.setExc(ex);
         }
         
+    }
+
+    private void promeniStrucnaSprema(Request request, Response response) {
+   
+        try {
+            Controller.getInstance().promeniStrucnaSprema((StrucnaSprema) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+        
+    }
+
+    private void obrisiStrucnaSprema(Request request, Response response) {
+        try {
+            Controller.getInstance().obrisiStrucnaSprema((StrucnaSprema) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void ubaciStrucnaSprema(Request request, Response response) {
+        try {
+            Controller.getInstance().ubaciStrucnaSprema((StrucnaSprema) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void promeniVrstaAktivnosti(Request request, Response response) {
+   
+        try {
+            Controller.getInstance().promeniVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+        
+    }
+
+    private void obrisiVrstaAktivnosti(Request request, Response response) {
+        try {
+            Controller.getInstance().obrisiVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void kreirajVrstaAktivnosti(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajVrstaAktivnosti((VrstaAktivnosti)request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
     }
 
 }
