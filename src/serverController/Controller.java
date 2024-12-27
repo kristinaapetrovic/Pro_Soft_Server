@@ -15,7 +15,10 @@ import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
+import operacija.aktivnost.KreirajAktivnost;
+import operacija.aktivnost.PromeniAktivnost;
 import operacija.aktivnost.VratiListuAktivnosti;
+import operacija.jesponzor.KreirajJeSponzor;
 import operacija.jesponzor.VratiListuJeSponzor;
 import operacija.menadzer.KreirajMenadzer;
 import operacija.menadzer.ObrisiMenadzer;
@@ -42,6 +45,7 @@ import operacija.menadzer.VratiListuSviMenadzer;
 import operacija.mesto.VratiListuSviMesto;
 import operacija.mss.KreirajMSS;
 import operacija.mss.ObrisiMSS;
+import operacija.projekat.KreirajUgovor;
 import operacija.projekat.PretraziProjekat;
 import operacija.projekat.VratiListuSviProjekat;
 import operacija.sponzor.VratiListuSviSponzor;
@@ -253,6 +257,26 @@ public class Controller {
         VratiListuJeSponzor operacija = new VratiListuJeSponzor();
         operacija.izvrsi(projekat, null);
         return operacija.getLista();
+    }
+
+    public void kreirajUgovor(Projekat projekat) throws Exception {
+        KreirajUgovor operacija=new KreirajUgovor();
+        operacija.izvrsi(projekat, null);
+    }
+
+    public void kreiraAktivnost(Aktivnost aktivnost) throws Exception {
+        KreirajAktivnost operacija=new KreirajAktivnost();
+        operacija.izvrsi(aktivnost, null);
+    }
+
+    public void kreirajJeSponzor(JeSponzor jeSponzor) throws Exception {
+        KreirajJeSponzor operacija=new KreirajJeSponzor();
+        operacija.izvrsi(jeSponzor, null);
+    }
+
+    public void promeniAktivnost(Aktivnost aktivnost) throws Exception {
+        PromeniAktivnost operacija=new PromeniAktivnost();
+        operacija.izvrsi(aktivnost, null);
     }
 
 }

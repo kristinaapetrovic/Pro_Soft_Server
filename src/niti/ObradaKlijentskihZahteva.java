@@ -180,6 +180,24 @@ public class ObradaKlijentskihZahteva extends Thread {
                     ucitajJeSponzorProjekta(request, response);
                     break;
                 }
+                case komunikacija.Operacija.KREIRAJ_UGOVOR: {
+                    kreirajUgovor(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.KREIRAJ_AKTIVNOST: {
+                    kreirajAktivnost(request, response);
+                    break;
+
+                }
+                case komunikacija.Operacija.KREIRAJ_JESPONZOR: {
+                    kreirajJeSponzor(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.PROMENI_AKTIVNOST: {
+                    promeniAktivnost(request, response);
+                    break;
+
+                }
 
                 default:
                     System.out.println("GRESKA, OPERACIJA NE POSTOJI");
@@ -536,6 +554,38 @@ public class ObradaKlijentskihZahteva extends Thread {
         }
 
         response.setOdgovor(lista);
+    }
+
+    private void kreirajUgovor(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajUgovor((Projekat) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void kreirajAktivnost(Request request, Response response) {
+        try {
+            Controller.getInstance().kreiraAktivnost((Aktivnost) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void kreirajJeSponzor(Request request, Response response) {
+        try {
+            Controller.getInstance().kreirajJeSponzor((JeSponzor) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+    }
+
+    private void promeniAktivnost(Request request, Response response) {
+        try {
+            Controller.getInstance().promeniAktivnost((Aktivnost) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
     }
 
 }
