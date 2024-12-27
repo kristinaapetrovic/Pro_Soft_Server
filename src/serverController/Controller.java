@@ -5,13 +5,18 @@
 package serverController;
 
 import java.util.List;
+import model.Aktivnost;
+import model.JeSponzor;
 import model.MSS;
 import model.Menadzer;
 import model.Mesto;
+import model.OpstiDomenskiObjekat;
 import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
+import operacija.aktivnost.VratiListuAktivnosti;
+import operacija.jesponzor.VratiListuJeSponzor;
 import operacija.menadzer.KreirajMenadzer;
 import operacija.menadzer.ObrisiMenadzer;
 import operacija.mesto.KreirajMesto;
@@ -37,6 +42,7 @@ import operacija.menadzer.VratiListuSviMenadzer;
 import operacija.mesto.VratiListuSviMesto;
 import operacija.mss.KreirajMSS;
 import operacija.mss.ObrisiMSS;
+import operacija.projekat.PretraziProjekat;
 import operacija.projekat.VratiListuSviProjekat;
 import operacija.sponzor.VratiListuSviSponzor;
 import operacija.strucnasprema.VratiListuSviStrucnaSprema;
@@ -171,27 +177,27 @@ public class Controller {
     }
 
     public void promeniSponzor(Sponzor sponzor) throws Exception {
-        PromeniSponzor operacija=new PromeniSponzor();
+        PromeniSponzor operacija = new PromeniSponzor();
         operacija.izvrsi(sponzor, null);
     }
 
     public void promeniStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
-        PromeniStrucnaSprema operacija=new PromeniStrucnaSprema();
+        PromeniStrucnaSprema operacija = new PromeniStrucnaSprema();
         operacija.izvrsi(strucnaSprema, null);
     }
 
     public void obrisiStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
-        ObrisiStrucnaSprema operacija=new ObrisiStrucnaSprema();
+        ObrisiStrucnaSprema operacija = new ObrisiStrucnaSprema();
         operacija.izvrsi(strucnaSprema, null);
     }
 
     public void ubaciStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
-        UbaciStrucnaSprema operacija=new UbaciStrucnaSprema();
+        UbaciStrucnaSprema operacija = new UbaciStrucnaSprema();
         operacija.izvrsi(strucnaSprema, null);
     }
 
     public void promeniVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
-        PromeniVrstaAktivnosti operacija=new PromeniVrstaAktivnosti();
+        PromeniVrstaAktivnosti operacija = new PromeniVrstaAktivnosti();
         operacija.izvrsi(vrstaAktivnosti, null);
     }
 
@@ -201,36 +207,52 @@ public class Controller {
     }
 
     public void kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
-        KreirajVrstaAktivnosti operacija= new KreirajVrstaAktivnosti();
+        KreirajVrstaAktivnosti operacija = new KreirajVrstaAktivnosti();
         operacija.izvrsi(vrstaAktivnosti, null);
     }
 
     public void kreirajMSS(MSS mss) throws Exception {
-        KreirajMSS operacija=new KreirajMSS();
+        KreirajMSS operacija = new KreirajMSS();
         operacija.izvrsi(mss, null);
     }
 
     public void obrisiMSS(MSS mss) throws Exception {
-        ObrisiMSS operacija=new ObrisiMSS();
+        ObrisiMSS operacija = new ObrisiMSS();
         operacija.izvrsi(mss, null);
     }
 
     public void obrisiMenadzer(Menadzer menadzer) throws Exception {
-        ObrisiMenadzer operacija=new ObrisiMenadzer();
+        ObrisiMenadzer operacija = new ObrisiMenadzer();
         operacija.izvrsi(menadzer, null);
     }
 
     public void promeniMenadzer(Menadzer menadzer) throws Exception {
-        PromeniMenadzer operacija=new PromeniMenadzer();
+        PromeniMenadzer operacija = new PromeniMenadzer();
         operacija.izvrsi(menadzer, null);
     }
 
     public Menadzer kreirajMenadzer(Menadzer menadzer) throws Exception {
-        KreirajMenadzer operacija=new KreirajMenadzer();
+        KreirajMenadzer operacija = new KreirajMenadzer();
         operacija.izvrsi(menadzer, null);
         return operacija.getMenadzer();
     }
 
-    
+    public List<Projekat> pretraziProjekat(OpstiDomenskiObjekat opstiDomenskiObjekat) throws Exception {
+        PretraziProjekat operacija = new PretraziProjekat();
+        operacija.izvrsi(opstiDomenskiObjekat, null);
+        return operacija.getLista();
+    }
+
+    public List<Aktivnost> vratiListuAktivnost(Projekat projekat) throws Exception {
+        VratiListuAktivnosti operacija = new VratiListuAktivnosti();
+        operacija.izvrsi(projekat, null);
+        return operacija.getLista();
+    }
+
+    public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) throws Exception {
+        VratiListuJeSponzor operacija = new VratiListuJeSponzor();
+        operacija.izvrsi(projekat, null);
+        return operacija.getLista();
+    }
 
 }

@@ -416,7 +416,7 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
     @Override
     public boolean readAktByUg(Projekat pu, List<Aktivnost> lista) {
 
-        String upit = "SELECT * FROM aktivnost a LEFT JOIN projektniugovor u USING (regBroj) LEFT JOIN vrstaaktivnosti va USING (idVrstaAktivnosti) WHERE regBroj=" + pu.getRegBroj();
+        String upit = "SELECT * FROM aktivnost a LEFT JOIN projektniugovor u USING (regBroj) LEFT JOIN vrstaaktivnosti va USING (idVrstaAktivnosti) WHERE regBroj=" + pu.vratiUslovZaNadjiSlog();
 
         try {
             ResultSet slogovi;

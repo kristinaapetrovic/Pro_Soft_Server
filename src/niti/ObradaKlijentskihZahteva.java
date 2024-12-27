@@ -4,23 +4,22 @@
  */
 package niti;
 
-import email.EmailPoruka;
 import java.io.IOException;
 import java.net.Socket;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.mail.MessagingException;
 import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
 import komunikacija.Sender;
+import model.Aktivnost;
+import model.JeSponzor;
 import model.MSS;
 import model.Menadzer;
 import model.Mesto;
+import model.OpstiDomenskiObjekat;
 import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
@@ -106,68 +105,80 @@ public class ObradaKlijentskihZahteva extends Thread {
                     kreirajMesto(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_MESTO:{
+                case komunikacija.Operacija.OBRISI_MESTO: {
                     obrisiMesto(request, response);
                     break;
                 }
-                case komunikacija.Operacija.PROMENI_MESTO:{
+                case komunikacija.Operacija.PROMENI_MESTO: {
                     promeniMesto(request, response);
                     break;
                 }
-                case komunikacija.Operacija.KREIRAJ_SPONZOR:{
+                case komunikacija.Operacija.KREIRAJ_SPONZOR: {
                     kreirajSponzor(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_SPONZOR:{
+                case komunikacija.Operacija.OBRISI_SPONZOR: {
                     obrisiSponzor(request, response);
                     break;
                 }
-                case komunikacija.Operacija.PROMENI_SPONZOR:{
+                case komunikacija.Operacija.PROMENI_SPONZOR: {
                     promeniSponzor(request, response);
                     break;
                 }
-                case komunikacija.Operacija.PROMENI_STRUCNA_SPREMA:{
+                case komunikacija.Operacija.PROMENI_STRUCNA_SPREMA: {
                     promeniStrucnaSprema(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_STRUCNA_SPREMA:{
+                case komunikacija.Operacija.OBRISI_STRUCNA_SPREMA: {
                     obrisiStrucnaSprema(request, response);
                     break;
                 }
-                case komunikacija.Operacija.UBACI_STRUCNA_SPREMA:{
+                case komunikacija.Operacija.UBACI_STRUCNA_SPREMA: {
                     ubaciStrucnaSprema(request, response);
                     break;
                 }
-                case komunikacija.Operacija.PROMENI_VRSTA_AKTIVNOSTI:{
+                case komunikacija.Operacija.PROMENI_VRSTA_AKTIVNOSTI: {
                     promeniVrstaAktivnosti(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_VRSTA_AKTIVNOSTI:{
+                case komunikacija.Operacija.OBRISI_VRSTA_AKTIVNOSTI: {
                     obrisiVrstaAktivnosti(request, response);
                     break;
                 }
-                case komunikacija.Operacija.KREIRAJ_VRSTA_AKTIVNOSTI:{
+                case komunikacija.Operacija.KREIRAJ_VRSTA_AKTIVNOSTI: {
                     kreirajVrstaAktivnosti(request, response);
                     break;
                 }
-                case komunikacija.Operacija.KREIRAJ_MSS:{
+                case komunikacija.Operacija.KREIRAJ_MSS: {
                     kreirajMSS(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_MSS:{
+                case komunikacija.Operacija.OBRISI_MSS: {
                     obrisiMSS(request, response);
                     break;
                 }
-                case komunikacija.Operacija.OBRISI_MENADZER:{
+                case komunikacija.Operacija.OBRISI_MENADZER: {
                     obrisiMenadzer(request, response);
                     break;
                 }
-                case komunikacija.Operacija.PROMENI_MENADZER:{
+                case komunikacija.Operacija.PROMENI_MENADZER: {
                     promeniMenadzer(request, response);
                     break;
                 }
-                case komunikacija.Operacija.KREIRAJ_MENADZER:{
+                case komunikacija.Operacija.KREIRAJ_MENADZER: {
                     kreirajMenadzer(request, response);
+                }
+                case komunikacija.Operacija.PRETRAZI_PROJEKAT: {
+                    pretraziProjekat(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.UCITAJ_AKTIVNOST_PROJEKTA: {
+                    ucitajAktivnostProjekta(request, response);
+                    break;
+                }
+                case komunikacija.Operacija.UCITAJ_JESPONZOR_PROJEKTA: {
+                    ucitajJeSponzorProjekta(request, response);
+                    break;
                 }
 
                 default:
@@ -355,7 +366,7 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void promeniMesto(Request request, Response response) {
@@ -364,7 +375,7 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void kreirajSponzor(Request request, Response response) {
@@ -373,18 +384,18 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void obrisiSponzor(Request request, Response response) {
-        
+
         try {
             Controller.getInstance().obrisiSponzor((Sponzor) request.getParametar());
         } catch (Exception ex) {
             response.setExc(ex);
-         
+
         }
-        
+
     }
 
     private void promeniSponzor(Request request, Response response) {
@@ -393,18 +404,17 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void promeniStrucnaSprema(Request request, Response response) {
-   
+
         try {
             Controller.getInstance().promeniStrucnaSprema((StrucnaSprema) request.getParametar());
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
-        
+
     }
 
     private void obrisiStrucnaSprema(Request request, Response response) {
@@ -424,13 +434,13 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void promeniVrstaAktivnosti(Request request, Response response) {
-   
+
         try {
             Controller.getInstance().promeniVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void obrisiVrstaAktivnosti(Request request, Response response) {
@@ -443,7 +453,7 @@ public class ObradaKlijentskihZahteva extends Thread {
 
     private void kreirajVrstaAktivnosti(Request request, Response response) {
         try {
-            Controller.getInstance().kreirajVrstaAktivnosti((VrstaAktivnosti)request.getParametar());
+            Controller.getInstance().kreirajVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -463,7 +473,7 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void obrisiMenadzer(Request request, Response response) {
@@ -472,7 +482,7 @@ public class ObradaKlijentskihZahteva extends Thread {
         } catch (Exception ex) {
             response.setExc(ex);
         }
-        
+
     }
 
     private void promeniMenadzer(Request request, Response response) {
@@ -492,8 +502,40 @@ public class ObradaKlijentskihZahteva extends Thread {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
         response.setOdgovor(men);
-          
-        
+
+    }
+
+    private void pretraziProjekat(Request request, Response response) {
+        List<Projekat> lista = new ArrayList<>();
+        try {
+            lista = Controller.getInstance().pretraziProjekat((OpstiDomenskiObjekat) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+
+        response.setOdgovor(lista);
+    }
+
+    private void ucitajAktivnostProjekta(Request request, Response response) {
+        List<Aktivnost> lista = new ArrayList<>();
+        try {
+            lista = Controller.getInstance().vratiListuAktivnost((Projekat) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+
+        response.setOdgovor(lista);
+    }
+
+    private void ucitajJeSponzorProjekta(Request request, Response response) {
+        List<JeSponzor> lista = new ArrayList<>();
+        try {
+            lista = Controller.getInstance().vratiListuJeSponzor((Projekat) request.getParametar());
+        } catch (Exception ex) {
+            response.setExc(ex);
+        }
+
+        response.setOdgovor(lista);
     }
 
 }
