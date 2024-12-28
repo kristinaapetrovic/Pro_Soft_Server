@@ -27,13 +27,13 @@ public class PrijavaOperacija extends ApstraktnaGenerickaOperacija {
     }
 
     @Override
-    protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
-        List<Menadzer> lista=broker.getAll((Menadzer) objekat, null);
+    protected void izvrsiOperaciju(Object objekat) throws Exception {
+        List<Menadzer> lista=broker.getAll((Menadzer) objekat);
         
         for(Menadzer men:lista){
             if(men.isAktivanNalog() && men.getEmail().equals(((Menadzer)objekat).getEmail()) && men.getLozinka().equals(((Menadzer)objekat).getLozinka())){
                 ulogovani=men;
-                System.out.println(ulogovani.toString()+" "+ulogovani.getDatumRodjenja());
+                System.out.println(ulogovani.toString()+" "+ulogovani.getDatumRodjenja()+" "+ulogovani.getJmbg());
                 return;
             }
         }

@@ -60,7 +60,12 @@ import operacija.vrstaaktivnosti.VratiListuVrstaAktivnosti;
 public class Controller {
 
     private static Controller instance;
+    private Menadzer ulogovani;
 
+    public Menadzer getUlogovani() {
+        return ulogovani;
+    }
+    
     private Controller() {
 
     }
@@ -74,209 +79,210 @@ public class Controller {
 
     public Menadzer prijava(Menadzer menadzer) throws Exception {
         PrijavaOperacija operacija = new PrijavaOperacija();
-        operacija.izvrsi(menadzer, null);
-        return operacija.getUlogovani();
+        operacija.izvrsi(menadzer, "prijava");
+        ulogovani=operacija.getUlogovani();
+        return ulogovani;
     }
 
     public List<Menadzer> vratiListuSviMenadzer() throws Exception {
         VratiListuSviMenadzer operacija = new VratiListuSviMenadzer();
-        operacija.izvrsi(new Menadzer(), null);
+        operacija.izvrsi(new Menadzer(), "citanje");
         return operacija.getLista();
     }
 
     public List<StrucnaSprema> vratiListuSviStrucnaSprema() throws Exception {
         VratiListuSviStrucnaSprema operacija = new VratiListuSviStrucnaSprema();
-        operacija.izvrsi(new StrucnaSprema(), null);
+        operacija.izvrsi(new StrucnaSprema(), "citanje");
         return operacija.getLista();
     }
 
     public List<MSS> vratiListuMSS(Menadzer menadzer) throws Exception {
         VratiListuMSS operacija = new VratiListuMSS(menadzer);
-        operacija.izvrsi(new MSS(), null);
+        operacija.izvrsi(new MSS(), "citanje");
         return operacija.getLista();
 
     }
 
     public List<Mesto> vratiListuSviMesto() throws Exception {
         VratiListuSviMesto operacija = new VratiListuSviMesto();
-        operacija.izvrsi(new Mesto(), null);
+        operacija.izvrsi(new Mesto(), "citanje");
         return operacija.getLista();
     }
 
     public List<VrstaAktivnosti> vratiListuSviVrstaAktivnosti() throws Exception {
         VratiListuSviVrstaAktivnosti operacija = new VratiListuSviVrstaAktivnosti();
-        operacija.izvrsi(new VrstaAktivnosti(), null);
+        operacija.izvrsi(new VrstaAktivnosti(), "citanje");
         return operacija.getLista();
     }
 
     public List<Projekat> vratiListuSviProjekat() throws Exception {
         VratiListuSviProjekat operacija = new VratiListuSviProjekat();
-        operacija.izvrsi(new Projekat(), null);
+        operacija.izvrsi(new Projekat(), "citanje");
         return operacija.getLista();
     }
 
     public List<Sponzor> vratiListuSviSponzor() throws Exception {
         VratiListuSviSponzor operacija = new VratiListuSviSponzor();
-        operacija.izvrsi(new Sponzor(), null);
+        operacija.izvrsi(new Sponzor(), "citanje");
         return operacija.getLista();
     }
 
     public List<Menadzer> vratiListuMenadzer(Menadzer menadzer) throws Exception {
         VratiListuMenadzer operacija = new VratiListuMenadzer(menadzer);
 
-        operacija.izvrsi(menadzer, null);
+        operacija.izvrsi(menadzer, "citanje");
 
         return operacija.getLista();
     }
 
     public List<Mesto> vratiListuMesto(Mesto mesto) throws Exception {
         VratiListuMesto operacija = new VratiListuMesto(mesto);
-        operacija.izvrsi(mesto, null);
+        operacija.izvrsi(mesto, "citanje");
         return operacija.getLista();
     }
 
     public List<Sponzor> vratiListuSponzor(Sponzor sponzor) throws Exception {
         VratiListuSponzor operacija = new VratiListuSponzor(sponzor);
-        operacija.izvrsi(sponzor, null);
+        operacija.izvrsi(sponzor, "citanje");
         return operacija.getLista();
     }
 
     public List<StrucnaSprema> vratiListuStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         VratiListuStrucnaSprema operacija = new VratiListuStrucnaSprema(strucnaSprema);
-        operacija.izvrsi(strucnaSprema, null);
+        operacija.izvrsi(strucnaSprema, "citanje");
         return operacija.getLista();
     }
 
     public List<VrstaAktivnosti> vratiListuVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         VratiListuVrstaAktivnosti operacija = new VratiListuVrstaAktivnosti(vrstaAktivnosti);
-        operacija.izvrsi(vrstaAktivnosti, null);
+        operacija.izvrsi(vrstaAktivnosti, "citanje");
         return operacija.getLista();
     }
 
     public void kreirajMesto(Mesto mesto) throws Exception {
         KreirajMesto operacija = new KreirajMesto();
-        operacija.izvrsi(mesto, null);
+        operacija.izvrsi(mesto, "kreiranje");
     }
 
     public void obrisiMesto(Mesto mesto) throws Exception {
         ObrisiMesto operacija = new ObrisiMesto();
-        operacija.izvrsi(mesto, null);
+        operacija.izvrsi(mesto, "brisanje");
     }
 
     public void promeniMesto(Mesto mesto) throws Exception {
         PromeniMesto operacija = new PromeniMesto();
-        operacija.izvrsi(mesto, null);
+        operacija.izvrsi(mesto, "azuriranje");
     }
 
     public void kreirajSponzor(Sponzor sponzor) throws Exception {
         KreirajSponzor operacija = new KreirajSponzor();
-        operacija.izvrsi(sponzor, null);
+        operacija.izvrsi(sponzor, "kreiranje");
     }
 
     public void obrisiSponzor(Sponzor sponzor) throws Exception {
 
         ObrisiSponzor operacija = new ObrisiSponzor();
-        operacija.izvrsi(sponzor, null);
+        operacija.izvrsi(sponzor, "brisanje");
 
     }
 
     public void promeniSponzor(Sponzor sponzor) throws Exception {
         PromeniSponzor operacija = new PromeniSponzor();
-        operacija.izvrsi(sponzor, null);
+        operacija.izvrsi(sponzor, "azuriranje");
     }
 
     public void promeniStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         PromeniStrucnaSprema operacija = new PromeniStrucnaSprema();
-        operacija.izvrsi(strucnaSprema, null);
+        operacija.izvrsi(strucnaSprema, "azuriranje");
     }
 
     public void obrisiStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         ObrisiStrucnaSprema operacija = new ObrisiStrucnaSprema();
-        operacija.izvrsi(strucnaSprema, null);
+        operacija.izvrsi(strucnaSprema, "brisanje");
     }
 
     public void ubaciStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         UbaciStrucnaSprema operacija = new UbaciStrucnaSprema();
-        operacija.izvrsi(strucnaSprema, null);
+        operacija.izvrsi(strucnaSprema, "kreiranje");
     }
 
     public void promeniVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         PromeniVrstaAktivnosti operacija = new PromeniVrstaAktivnosti();
-        operacija.izvrsi(vrstaAktivnosti, null);
+        operacija.izvrsi(vrstaAktivnosti, "azuriranje");
     }
 
     public void obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         ObrisiVrstaAktivnosti operacija = new ObrisiVrstaAktivnosti();
-        operacija.izvrsi(vrstaAktivnosti, null);
+        operacija.izvrsi(vrstaAktivnosti, "brisanje");
     }
 
     public void kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         KreirajVrstaAktivnosti operacija = new KreirajVrstaAktivnosti();
-        operacija.izvrsi(vrstaAktivnosti, null);
+        operacija.izvrsi(vrstaAktivnosti, "kreiranje");
     }
 
     public void kreirajMSS(MSS mss) throws Exception {
         KreirajMSS operacija = new KreirajMSS();
-        operacija.izvrsi(mss, null);
+        operacija.izvrsi(mss, "kreiranje");
     }
 
     public void obrisiMSS(MSS mss) throws Exception {
         ObrisiMSS operacija = new ObrisiMSS();
-        operacija.izvrsi(mss, null);
+        operacija.izvrsi(mss, "brisanje");
     }
 
     public void obrisiMenadzer(Menadzer menadzer) throws Exception {
         ObrisiMenadzer operacija = new ObrisiMenadzer();
-        operacija.izvrsi(menadzer, null);
+        operacija.izvrsi(menadzer, "brisanje");
     }
 
     public void promeniMenadzer(Menadzer menadzer) throws Exception {
         PromeniMenadzer operacija = new PromeniMenadzer();
-        operacija.izvrsi(menadzer, null);
+        operacija.izvrsi(menadzer, "azuriranje");
     }
 
     public Menadzer kreirajMenadzer(Menadzer menadzer) throws Exception {
         KreirajMenadzer operacija = new KreirajMenadzer();
-        operacija.izvrsi(menadzer, null);
+        operacija.izvrsi(menadzer, "kreiranje");
         return operacija.getMenadzer();
     }
 
     public List<Projekat> pretraziProjekat(OpstiDomenskiObjekat opstiDomenskiObjekat) throws Exception {
         PretraziProjekat operacija = new PretraziProjekat();
-        operacija.izvrsi(opstiDomenskiObjekat, null);
+        operacija.izvrsi(opstiDomenskiObjekat, "citanje");
         return operacija.getLista();
     }
 
     public List<Aktivnost> vratiListuAktivnost(Projekat projekat) throws Exception {
         VratiListuAktivnosti operacija = new VratiListuAktivnosti();
-        operacija.izvrsi(projekat, null);
+        operacija.izvrsi(projekat, "citanje");
         return operacija.getLista();
     }
 
     public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) throws Exception {
         VratiListuJeSponzor operacija = new VratiListuJeSponzor();
-        operacija.izvrsi(projekat, null);
+        operacija.izvrsi(projekat, "citanje");
         return operacija.getLista();
     }
 
     public void kreirajUgovor(Projekat projekat) throws Exception {
         KreirajUgovor operacija=new KreirajUgovor();
-        operacija.izvrsi(projekat, null);
+        operacija.izvrsi(projekat, "kreiranje");
     }
 
     public void kreiraAktivnost(Aktivnost aktivnost) throws Exception {
         KreirajAktivnost operacija=new KreirajAktivnost();
-        operacija.izvrsi(aktivnost, null);
+        operacija.izvrsi(aktivnost, "kreiranje");
     }
 
     public void kreirajJeSponzor(JeSponzor jeSponzor) throws Exception {
         KreirajJeSponzor operacija=new KreirajJeSponzor();
-        operacija.izvrsi(jeSponzor, null);
+        operacija.izvrsi(jeSponzor, "kreiranje");
     }
 
     public void promeniAktivnost(Aktivnost aktivnost) throws Exception {
         PromeniAktivnost operacija=new PromeniAktivnost();
-        operacija.izvrsi(aktivnost, null);
+        operacija.izvrsi(aktivnost, "azuriranje");
     }
 
 }

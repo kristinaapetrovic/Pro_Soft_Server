@@ -23,6 +23,7 @@ import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
 import repository.db.DbRepository;
+import serverController.Controller;
 
 /**
  *
@@ -34,15 +35,12 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
     private Statement st;
 
     @Override
-    public List<OpstiDomenskiObjekat> getAll(OpstiDomenskiObjekat param, String uslov) throws Exception {
+    public List<OpstiDomenskiObjekat> getAll(OpstiDomenskiObjekat param) throws Exception {
         try {
             List<OpstiDomenskiObjekat> lista = new ArrayList<>();
             st = con.getConnection().createStatement();
             String upit = "SELECT * FROM " + param.vratiImeKlase() + " " + param.nijeObrisan();
-            if (uslov != null) {
-                upit = upit + " " + uslov;
-                System.out.println(upit);
-            }
+
             ResultSet rs = st.executeQuery(upit);
 
             while (rs.next()) {
@@ -105,7 +103,7 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
         try {
             st = con.getConnection().createStatement();
             String upit = "UPDATE " + param.vratiImeKlase() + " SET " + param.obrazacZaBrisanje() + " WHERE " + param.vratiUslovZaNadjiSlog();
-            
+
             st.executeUpdate(upit);
             st.close();
 
@@ -528,5 +526,61 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
         }
 
         return true;
+    }
+
+    @Override
+    public OpstiDomenskiObjekat readByPK(OpstiDomenskiObjekat odo) {
+        try {
+
+            st = con.getConnection().createStatement();
+            String upit = "SELECT * FROM " + odo.vratiImeKlase() + " WHERE " + odo.vratiUslovZaNadjiSlog();
+            ResultSet rs = st.executeQuery(upit);
+
+            while (rs.next()) {
+                OpstiDomenskiObjekat noviObjekat;
+                try {
+                    noviObjekat = odo.getClass().getDeclaredConstructor().newInstance();
+                    if (noviObjekat.Napuni(rs)) {
+                        return noviObjekat;
+                    }
+                } catch (Exception ex) {
+
+                }
+            }
+
+            return null;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public void history(Object object, String kljuc) {
+        try {
+            OpstiDomenskiObjekat odo = (OpstiDomenskiObjekat) object;
+            Menadzer izvrsilac = Controller.getInstance().getUlogovani();
+            OpstiDomenskiObjekat stari = readByPK(odo);
+            String jsonStari = "null";
+            String jsonNovi = "null";
+            if (kljuc.equalsIgnoreCase("azuriranje")) {
+                jsonStari = stari.toJson();
+                jsonNovi = odo.toJson();
+            } else if (kljuc.equalsIgnoreCase("brisanje")) {
+                jsonStari = odo.toJson();
+            } else {//kreiranje
+                jsonNovi = odo.toJson();
+            }
+            
+            java.util.Date datum = new java.util.Date();
+            java.sql.Date datumSQL = new java.sql.Date(datum.getTime());
+            String upit = "INSERT INTO history (vreme,menadzer,vrstaOperacije,objekatBaze,staraVrednost,novaVrednost) VALUES ('" + datumSQL + "','" + izvrsilac.getJmbg() + "','" + kljuc + "','" + odo.vratiImeKlase() + "','" + jsonStari + "','" + jsonNovi + "')";
+            st = con.getConnection().createStatement();
+            
+            st.executeUpdate(upit);
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DbRepositoryGeneric.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }

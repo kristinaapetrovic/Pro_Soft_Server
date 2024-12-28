@@ -5,11 +5,12 @@
 package operacija;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import model.Menadzer;
+import model.OpstiDomenskiObjekat;
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.DbRepositoryGeneric;
+import serverController.Controller;
 
 /**
  *
@@ -23,18 +24,19 @@ public abstract class ApstraktnaGenerickaOperacija {
         this.broker = new DbRepositoryGeneric();
     }
 
-    public final void izvrsi(Object objekat, String kljuc) throws Exception{
+    public final void izvrsi(Object objekat, String kljuc) throws Exception {
 
         try {
             preduslovi(objekat);
             zaspocniTransakciju();
-            izvrsiOperaciju(objekat, kljuc);
-            potvrdiTransakciju();
+            izvrsiOperaciju(objekat);
+            if(!kljuc.equalsIgnoreCase("citanje") && !kljuc.equalsIgnoreCase("prijava") )
+                potvrdiTransakciju(objekat, kljuc);
         } catch (Exception ex) {
             ponistiTransakciju();
             throw ex;
         } finally {
-           // ugasiKonekciju();
+            // ugasiKonekciju();
         }
     }
 
@@ -44,9 +46,10 @@ public abstract class ApstraktnaGenerickaOperacija {
         ((DbRepository) broker).connect();
     }
 
-    protected abstract void izvrsiOperaciju(Object objekat, String kljuc) throws Exception;
+    protected abstract void izvrsiOperaciju(Object objekat) throws Exception;
 
-    private void potvrdiTransakciju() throws SQLException {
+    private void potvrdiTransakciju(Object object, String kljuc) throws SQLException {
+        ((DbRepository) broker).history(object, kljuc);
         ((DbRepository) broker).commit();
     }
 
@@ -57,5 +60,7 @@ public abstract class ApstraktnaGenerickaOperacija {
     private void ugasiKonekciju() throws SQLException {
         ((DbRepository) broker).disconnect();
     }
+
+    
 
 }

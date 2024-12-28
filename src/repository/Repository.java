@@ -22,7 +22,7 @@ import model.VrstaAktivnosti;
  */
 public interface Repository<T> {
 
-    List<T> getAll(T param, String uslov) throws Exception;
+    List<T> getAll(T param) throws Exception;
 
     void add(T param) throws Exception;
 
@@ -60,4 +60,7 @@ public interface Repository<T> {
     
     boolean readMSS(List<MSS> lista, Menadzer men);
     
+    OpstiDomenskiObjekat readByPK(OpstiDomenskiObjekat odo);
+    
+    void history(Object object, String kljuc);
 }

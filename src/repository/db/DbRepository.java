@@ -30,5 +30,7 @@ public interface DbRepository<T> extends Repository<T> {
     default public void rollback() throws SQLException {
         Konekcija.getInstance().getConnection().rollback();
     }
+    
+    
 
 }

@@ -34,7 +34,7 @@ public class KreirajMenadzer extends ApstraktnaGenerickaOperacija {
     }
 
     @Override
-    protected void izvrsiOperaciju(Object objekat, String kljuc) throws Exception {
+    protected void izvrsiOperaciju(Object objekat) throws Exception {
         menadzer=(Menadzer) objekat;
         Random random = new Random();
         int kod = 10000 + random.nextInt(90000);
