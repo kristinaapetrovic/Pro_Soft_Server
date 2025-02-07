@@ -5,9 +5,8 @@
 package serverForm;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import konfiguracija.Konfiguracija;
 import server.*;
 
 /**
@@ -137,6 +136,12 @@ public class ServerForma extends javax.swing.JFrame {
 
     private void jButtonPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPokreniActionPerformed
 
+        if (!Konfiguracija.getInstance().konfiguracijaPostoji()) {
+            KonfiguracijaForma kf=new KonfiguracijaForma(this, true);
+            kf.setVisible(true);
+            return;
+        }
+
         server.start();
 
         jLabel2.setText("pokrenut");
@@ -205,4 +210,6 @@ public class ServerForma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
+
+ 
 }

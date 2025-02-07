@@ -18,7 +18,7 @@ public class PortForma extends javax.swing.JDialog {
     public PortForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jTextFieldPort.setText(konfiguracija.Konfiguracija.getInstance().getPropery("port"));
+        jTextFieldPort.setText(konfiguracija.Konfiguracija.getInstance().getPropery("port").equals("n/a")?"":konfiguracija.Konfiguracija.getInstance().getPropery("port"));
     }
 
     /**
@@ -53,10 +53,10 @@ public class PortForma extends javax.swing.JDialog {
                 .addGap(51, 51, 51)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(130, 130, 130)
-                .addComponent(jTextFieldPort, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addComponent(jTextFieldPort, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(338, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(22, 22, 22))
         );

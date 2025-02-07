@@ -4,7 +4,9 @@
  */
 package serverForm;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -101,6 +103,13 @@ public class BazaForma extends javax.swing.JDialog {
         String url = jTextFieldURL.getText().trim();
         String username = jTextFieldUsername.getText().trim();
         String pass = String.valueOf(jPasswordFieldLozinka.getPassword());
+        
+        if (!validacija(url, username, pass)) {
+            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        
         try {
             konfiguracija.Konfiguracija.getInstance().setProperty("url", url);
             konfiguracija.Konfiguracija.getInstance().setProperty("username", username);
@@ -132,8 +141,33 @@ public class BazaForma extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void popuniPolja() {
-        jTextFieldURL.setText(konfiguracija.Konfiguracija.getInstance().getPropery("url"));
-        jTextFieldUsername.setText(konfiguracija.Konfiguracija.getInstance().getPropery("username"));
-        jPasswordFieldLozinka.setText(konfiguracija.Konfiguracija.getInstance().getPropery("password"));
+        jTextFieldURL.setText(konfiguracija.Konfiguracija.getInstance().getPropery("url").equals("n/a")?"":konfiguracija.Konfiguracija.getInstance().getPropery("url"));
+        jTextFieldUsername.setText(konfiguracija.Konfiguracija.getInstance().getPropery("username").equals("n/a")?"":konfiguracija.Konfiguracija.getInstance().getPropery("username"));
+        jPasswordFieldLozinka.setText(konfiguracija.Konfiguracija.getInstance().getPropery("password").equals("n/a")?"":konfiguracija.Konfiguracija.getInstance().getPropery("password"));
+    }
+    private boolean validacija(String url, String username, String pass) {
+        boolean urlReg = !url.isEmpty() && url.matches("^jdbc:mysql://localhost:\\d{1,5}/[a-zA-Z_][a-zA-Z0-9_]*$");
+        boolean usernameReg = !username.isEmpty();
+        boolean passReg = !pass.isEmpty();
+        
+        if (urlReg && usernameReg && passReg) {
+            return true;
+        }
+
+        if (!urlReg) {
+            jTextFieldURL.setBorder(new LineBorder(Color.RED, 2));
+        }
+
+        if (!usernameReg) {
+            jTextFieldUsername.setBorder(new LineBorder(Color.RED, 2));
+        }
+
+        if (!passReg) {
+            jPasswordFieldLozinka.setBorder(new LineBorder(Color.RED, 2));
+        }
+
+        
+
+        return false;
     }
 }
