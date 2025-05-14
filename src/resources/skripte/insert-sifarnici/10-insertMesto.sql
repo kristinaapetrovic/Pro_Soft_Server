@@ -1,0 +1,1 @@
+INSERT INTO mesto (postanskiBroj, nazivMesto, obrisanoMesto) VALUES ('11000', 'Beograd', FALSE);

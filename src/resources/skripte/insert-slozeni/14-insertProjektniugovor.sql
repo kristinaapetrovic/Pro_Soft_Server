@@ -1,0 +1,2 @@
+INSERT INTO projektniugovor (regBroj, nazivProjekta, opisProjekta, budzet, trajanje, datumPocetka, datumZavrsetka, jmbg) 
+VALUES ('REG001', 'Projekat 1', 'Opis projekta 1', 1000000.00, 12, '2025-01-01', '2025-12-31', '1234567890123');

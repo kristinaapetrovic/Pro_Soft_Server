@@ -1,0 +1,1 @@
+INSERT INTO vrstaaktivnosti (nazivVrstaAktivnosti, obrisanaVA) VALUES ('Marketing', FALSE);

@@ -1,0 +1,68 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="your_name" id="1">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="2">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="3">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="4">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="5">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="6">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="7">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="8">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="9">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="10">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="11">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="12">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="13">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="14">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="15">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="16">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="17">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="18">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+<changeSet author="your_name" id="19">
+        <sqlFile path="resources\skriptaZaBazu.sql" />
+    </changeSet>
+
+
+</databaseChangeLog>
+
+

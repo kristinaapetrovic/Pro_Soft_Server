@@ -4,6 +4,7 @@
  */
 package niti;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -216,14 +217,16 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void prijava(Request request, Response response) {
-        Menadzer menadzer = (Menadzer) request.getParametar();
+        Menadzer menadzer = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
         try {
-            menadzer = Controller.getInstance().prijava(menadzer);
-        } catch (Exception ex) {
+            Menadzer men = Controller.getInstance().prijava(menadzer);
+            String obj = jsonFormat.JSONFormat.toJson(men);
+            response.setOdgovor(obj);
 
+        } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
-        response.setOdgovor(menadzer);
     }
 
     private void ucitajMenadzere(Request request, Response response) {
@@ -232,6 +235,7 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviMenadzer();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -245,6 +249,7 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviStrucnaSprema();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -252,12 +257,14 @@ public class ObradaKlijentskihZahteva extends Thread {
 
     private void ucitajMSS(Request request, Response response) {
         List<MSS> lista = new ArrayList<>();
-        Menadzer menadzer = (Menadzer) request.getParametar();
+        Menadzer menadzer = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
         try {
             lista = Controller.getInstance().vratiListuMSS(menadzer);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
+
         response.setOdgovor(lista);
     }
 
@@ -268,6 +275,7 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviMesto();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -281,6 +289,7 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviVrstaAktivnosti();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -294,6 +303,7 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviProjekat();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -305,17 +315,20 @@ public class ObradaKlijentskihZahteva extends Thread {
             lista = Controller.getInstance().vratiListuSviSponzor();
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
+        System.out.println(lista.get(0).getMaticniBroj());
         response.setOdgovor(lista);
     }
 
     private void ucitajMenadzereFilter(Request request, Response response) {
         List<Menadzer> lista = new ArrayList<>();
-
+        Menadzer men = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
         try {
-            lista = Controller.getInstance().vratiListuMenadzer((Menadzer) request.getParametar());
+            lista = Controller.getInstance().vratiListuMenadzer(men);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -325,10 +338,12 @@ public class ObradaKlijentskihZahteva extends Thread {
     private void ucitajMestaFilter(Request request, Response response) {
         List<Mesto> lista = new ArrayList<>();
 
+        Mesto mesto = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Mesto.class);
         try {
-            lista = Controller.getInstance().vratiListuMesto((Mesto) request.getParametar());
+            lista = Controller.getInstance().vratiListuMesto(mesto);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
 
         response.setOdgovor(lista);
@@ -336,51 +351,53 @@ public class ObradaKlijentskihZahteva extends Thread {
 
     private void ucitajSponzorFilter(Request request, Response response) {
         List<Sponzor> lista = new ArrayList<>();
-
+        Sponzor sponzor = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Sponzor.class);
         try {
-            lista = Controller.getInstance().vratiListuSponzor((Sponzor) request.getParametar());
+            lista = Controller.getInstance().vratiListuSponzor(sponzor);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
-
         response.setOdgovor(lista);
     }
 
     private void ucitajSSFilter(Request request, Response response) {
         List<StrucnaSprema> lista = new ArrayList<>();
-
+        StrucnaSprema ss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), StrucnaSprema.class);
         try {
-            lista = Controller.getInstance().vratiListuStrucnaSprema((StrucnaSprema) request.getParametar());
+            lista = Controller.getInstance().vratiListuStrucnaSprema(ss);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
-
         response.setOdgovor(lista);
     }
 
     private void ucitajVAFilter(Request request, Response response) {
         List<VrstaAktivnosti> lista = new ArrayList<>();
-
+        VrstaAktivnosti vakt = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), VrstaAktivnosti.class);
         try {
             lista = Controller.getInstance().vratiListuVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
+            response.setExc(ex);
         }
-
         response.setOdgovor(lista);
     }
 
     private void kreirajMesto(Request request, Response response) {
         try {
-            Controller.getInstance().kreirajMesto((Mesto) request.getParametar());
+            Mesto mesto = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Mesto.class);
+            Controller.getInstance().kreirajMesto(mesto);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void obrisiMesto(Request request, Response response) {
+        Mesto mesto = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Mesto.class);
         try {
-            Controller.getInstance().obrisiMesto((Mesto) request.getParametar());
+            Controller.getInstance().obrisiMesto(mesto);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -388,8 +405,9 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void promeniMesto(Request request, Response response) {
+        Mesto mesto = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Mesto.class);
         try {
-            Controller.getInstance().promeniMesto((Mesto) request.getParametar());
+            Controller.getInstance().promeniMesto(mesto);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -397,8 +415,9 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void kreirajSponzor(Request request, Response response) {
+        Sponzor sponzor = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Sponzor.class);
         try {
-            Controller.getInstance().kreirajSponzor((Sponzor) request.getParametar());
+            Controller.getInstance().kreirajSponzor(sponzor);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -406,9 +425,10 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void obrisiSponzor(Request request, Response response) {
+        Sponzor sponzor = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Sponzor.class);
 
         try {
-            Controller.getInstance().obrisiSponzor((Sponzor) request.getParametar());
+            Controller.getInstance().obrisiSponzor(sponzor);
         } catch (Exception ex) {
             response.setExc(ex);
 
@@ -417,8 +437,10 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void promeniSponzor(Request request, Response response) {
+        Sponzor sponzor = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Sponzor.class);
+
         try {
-            Controller.getInstance().promeniSponzor((Sponzor) request.getParametar());
+            Controller.getInstance().promeniSponzor(sponzor);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -426,9 +448,10 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void promeniStrucnaSprema(Request request, Response response) {
+        StrucnaSprema ss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), StrucnaSprema.class);
 
         try {
-            Controller.getInstance().promeniStrucnaSprema((StrucnaSprema) request.getParametar());
+            Controller.getInstance().promeniStrucnaSprema(ss);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -436,25 +459,30 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void obrisiStrucnaSprema(Request request, Response response) {
+        StrucnaSprema ss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), StrucnaSprema.class);
+
         try {
-            Controller.getInstance().obrisiStrucnaSprema((StrucnaSprema) request.getParametar());
+            Controller.getInstance().obrisiStrucnaSprema(ss);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void ubaciStrucnaSprema(Request request, Response response) {
+        StrucnaSprema ss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), StrucnaSprema.class);
+
         try {
-            Controller.getInstance().ubaciStrucnaSprema((StrucnaSprema) request.getParametar());
+            Controller.getInstance().ubaciStrucnaSprema(ss);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void promeniVrstaAktivnosti(Request request, Response response) {
+        VrstaAktivnosti va  = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), VrstaAktivnosti.class);
 
         try {
-            Controller.getInstance().promeniVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+            Controller.getInstance().promeniVrstaAktivnosti(va);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -462,32 +490,40 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void obrisiVrstaAktivnosti(Request request, Response response) {
+        VrstaAktivnosti va  = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), VrstaAktivnosti.class);
+
         try {
-            Controller.getInstance().obrisiVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+            Controller.getInstance().obrisiVrstaAktivnosti(va);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void kreirajVrstaAktivnosti(Request request, Response response) {
+        VrstaAktivnosti va  = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), VrstaAktivnosti.class);
+
         try {
-            Controller.getInstance().kreirajVrstaAktivnosti((VrstaAktivnosti) request.getParametar());
+            Controller.getInstance().kreirajVrstaAktivnosti(va);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void kreirajMSS(Request request, Response response) {
+        MSS mss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), MSS.class);
+
         try {
-            Controller.getInstance().kreirajMSS((MSS) request.getParametar());
+            Controller.getInstance().kreirajMSS(mss);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void obrisiMSS(Request request, Response response) {
+        MSS mss = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), MSS.class);
+
         try {
-            Controller.getInstance().obrisiMSS((MSS) request.getParametar());
+            Controller.getInstance().obrisiMSS(mss);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -495,8 +531,10 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void obrisiMenadzer(Request request, Response response) {
+        Menadzer menadzer = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
+
         try {
-            Controller.getInstance().obrisiMenadzer((Menadzer) request.getParametar());
+            Controller.getInstance().obrisiMenadzer(menadzer);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -504,29 +542,34 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void promeniMenadzer(Request request, Response response) {
+        Menadzer menadzer = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
+
         try {
-            Controller.getInstance().promeniMenadzer((Menadzer) request.getParametar());
+            Controller.getInstance().promeniMenadzer(menadzer);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void kreirajMenadzer(Request request, Response response) {
-        Menadzer menadzer = (Menadzer) request.getParametar();
+        Menadzer menadzer = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Menadzer.class);
         Menadzer men = null;
         try {
             men = Controller.getInstance().kreirajMenadzer(menadzer);
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskihZahteva.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.setOdgovor(men);
-
+        String odg = jsonFormat.JSONFormat.toJson(men);
+        response.setOdgovor(odg);
     }
 
     private void pretraziProjekat(Request request, Response response) {
         List<Projekat> lista = new ArrayList<>();
+        OpstiDomenskiObjekat odo = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), new TypeReference<OpstiDomenskiObjekat>() {
+        });
+
         try {
-            lista = Controller.getInstance().pretraziProjekat((OpstiDomenskiObjekat) request.getParametar());
+            lista = Controller.getInstance().pretraziProjekat(odo);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -536,8 +579,9 @@ public class ObradaKlijentskihZahteva extends Thread {
 
     private void ucitajAktivnostProjekta(Request request, Response response) {
         List<Aktivnost> lista = new ArrayList<>();
+        Projekat projekat = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Projekat.class);
         try {
-            lista = Controller.getInstance().vratiListuAktivnost((Projekat) request.getParametar());
+            lista = Controller.getInstance().vratiListuAktivnost(projekat);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -547,8 +591,9 @@ public class ObradaKlijentskihZahteva extends Thread {
 
     private void ucitajJeSponzorProjekta(Request request, Response response) {
         List<JeSponzor> lista = new ArrayList<>();
+        Projekat projekat = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Projekat.class);
         try {
-            lista = Controller.getInstance().vratiListuJeSponzor((Projekat) request.getParametar());
+            lista = Controller.getInstance().vratiListuJeSponzor(projekat);
         } catch (Exception ex) {
             response.setExc(ex);
         }
@@ -557,32 +602,44 @@ public class ObradaKlijentskihZahteva extends Thread {
     }
 
     private void kreirajUgovor(Request request, Response response) {
+        Projekat projekat = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Projekat.class);
+
         try {
-            Controller.getInstance().kreirajUgovor((Projekat) request.getParametar());
+            Controller.getInstance().kreirajUgovor(projekat);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void kreirajAktivnost(Request request, Response response) {
+        Aktivnost aktivnost = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Aktivnost.class);
+
         try {
-            Controller.getInstance().kreiraAktivnost((Aktivnost) request.getParametar());
+            Controller.getInstance().kreiraAktivnost(aktivnost);
+
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             response.setExc(ex);
+
         }
     }
 
     private void kreirajJeSponzor(Request request, Response response) {
+        JeSponzor js = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), JeSponzor.class);
+
         try {
-            Controller.getInstance().kreirajJeSponzor((JeSponzor) request.getParametar());
+            Controller.getInstance().kreirajJeSponzor(js);
         } catch (Exception ex) {
             response.setExc(ex);
         }
     }
 
     private void promeniAktivnost(Request request, Response response) {
+        Aktivnost aktivnost = jsonFormat.JSONFormat.fromJson(request.getParametar().toString(), Aktivnost.class);
+
         try {
-            Controller.getInstance().promeniAktivnost((Aktivnost) request.getParametar());
+            Controller.getInstance().promeniAktivnost(aktivnost);
+
         } catch (Exception ex) {
             response.setExc(ex);
         }

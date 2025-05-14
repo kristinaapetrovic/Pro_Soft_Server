@@ -4,6 +4,7 @@
  */
 package serverForm;
 
+import dbinit.DatabaseInitializer;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import konfiguracija.Konfiguracija;
@@ -137,7 +138,7 @@ public class ServerForma extends javax.swing.JFrame {
     private void jButtonPokreniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPokreniActionPerformed
 
         if (!Konfiguracija.getInstance().konfiguracijaPostoji()) {
-            KonfiguracijaForma kf=new KonfiguracijaForma(this, true);
+            KonfiguracijaForma kf = new KonfiguracijaForma(this, true);
             kf.setVisible(true);
             return;
         }
@@ -147,7 +148,13 @@ public class ServerForma extends javax.swing.JFrame {
         jLabel2.setText("pokrenut");
         jButtonZaustavi.setEnabled(true);
         jButtonPokreni.setEnabled(false);
+        String url = Konfiguracija.getInstance().getPropery("url");
+        String user = Konfiguracija.getInstance().getPropery("username");
+        String pass = Konfiguracija.getInstance().getPropery("password");
+         String dbName = url.substring(url.lastIndexOf("/") + 1);
+        String url_bezBaze = url.substring(0, url.lastIndexOf("/"));
 
+        DatabaseInitializer bd = new DatabaseInitializer(url_bezBaze, user, pass, dbName);
 
     }//GEN-LAST:event_jButtonPokreniActionPerformed
 
@@ -211,5 +218,4 @@ public class ServerForma extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 
- 
 }

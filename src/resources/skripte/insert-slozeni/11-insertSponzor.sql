@@ -1,0 +1,1 @@
+INSERT INTO sponzor (maticniBroj, nazivFirme, vlasnik, obrisanGI, postanskiBroj) VALUES ('12345678', 'Firma ABC', 'Marko Marković', FALSE, '11000');

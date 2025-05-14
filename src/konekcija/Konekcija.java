@@ -29,6 +29,7 @@ public class Konekcija {
             connection.setAutoCommit(false);
         } catch (SQLException ex) {
             Logger.getLogger(Konekcija.class.getName()).log(Level.SEVERE, null, ex);
+            System.exit(0);
         }
 
     }

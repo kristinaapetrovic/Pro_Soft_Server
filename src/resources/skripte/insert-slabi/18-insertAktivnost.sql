@@ -1,0 +1,2 @@
+INSERT INTO aktivnost (redniBroj, regBroj, nazivAktivnosti, opisAktivnosti, obavljena, datumRealizacije, idVrstaAktivnosti) 
+VALUES (1, 'REG001', 'Aktivnost 1', 'Opis aktivnosti 1', FALSE, '2025-02-01',1);

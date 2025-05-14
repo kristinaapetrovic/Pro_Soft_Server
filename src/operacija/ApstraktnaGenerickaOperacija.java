@@ -30,10 +30,12 @@ public abstract class ApstraktnaGenerickaOperacija {
             preduslovi(objekat);
             zaspocniTransakciju();
             izvrsiOperaciju(objekat);
-            if(!kljuc.equalsIgnoreCase("citanje") && !kljuc.equalsIgnoreCase("prijava") )
+            if(!kljuc.equalsIgnoreCase("citanje") && !kljuc.equalsIgnoreCase("prijava") ){
                 potvrdiTransakciju(objekat, kljuc);
+            }
         } catch (Exception ex) {
             ponistiTransakciju();
+          
             throw ex;
         } finally {
             // ugasiKonekciju();

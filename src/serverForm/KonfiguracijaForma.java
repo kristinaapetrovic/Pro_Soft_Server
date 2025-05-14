@@ -4,6 +4,7 @@
  */
 package serverForm;
 
+import dbinit.DatabaseInitializer;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -140,6 +141,9 @@ public class KonfiguracijaForma extends javax.swing.JDialog {
         Konfiguracija.getInstance().setProperty("port", port);
 
         Konfiguracija.getInstance().sacuvajIzmene();
+        String dbName = url.substring(url.lastIndexOf("/") + 1);
+        String url_bezBaze = url.substring(0, url.lastIndexOf("/"));
+       // DatabaseInitializer dbinit=new DatabaseInitializer(url_bezBaze, username, pass, dbName);
 
         JOptionPane.showMessageDialog(this, "Podesavanje zavrseno, kada zatvorite formu server ce se pokrenuti!", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
 

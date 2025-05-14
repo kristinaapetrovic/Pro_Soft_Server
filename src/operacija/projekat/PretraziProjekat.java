@@ -26,7 +26,7 @@ public class PretraziProjekat extends ApstraktnaGenerickaOperacija{
     }
 
     @Override
-    protected void izvrsiOperaciju(Object objekat ) throws Exception {
+    protected void izvrsiOperaciju(Object objekat) throws Exception {
         broker.readUgovorWithCondition(objekat, lista);
     }
     

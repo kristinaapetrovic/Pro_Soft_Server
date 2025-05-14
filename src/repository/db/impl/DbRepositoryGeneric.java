@@ -66,17 +66,13 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
 
     @Override
     public void add(OpstiDomenskiObjekat param) throws Exception {
-        try {
-            st = con.getConnection().createStatement();
-            String upit = "INSERT INTO " + param.vratiImeKlase() + " " + param.vratiListuAtributa() + "" + " VALUES " + param.vratiVrednostiAtributa();
-            st.executeUpdate(upit);
-            st.close();
 
-        } catch (SQLException ex) {
+        st = con.getConnection().createStatement();
+        String upit = "INSERT INTO " + param.vratiImeKlase() + " " + param.vratiListuAtributa() + "" + " VALUES " + param.vratiVrednostiAtributa();
+        System.out.println(upit);
+        st.executeUpdate(upit);
+        st.close();
 
-            System.out.println("Neuspesno ubacivanje objekta " + param.vratiImeKlase() + " u bazu");
-
-        }
         System.out.println("Objekat " + param.vratiImeKlase() + " je uspesno ubacen u bazu");
 
     }
@@ -357,23 +353,16 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
 
             while (slogovi.next()) {
                 provera = 1;
-                //Mesto mesto = new Mesto();
-                //Sponzor gi = new Sponzor();
                 Menadzer menadzer = new Menadzer();
                 Projekat ugovor = new Projekat();
 
-                //mesto.Napuni(slogovi);
-//                gi.Napuni(slogovi);
-//                gi.setMesto(mesto);
                 menadzer.Napuni(slogovi);
 
                 ugovor.Napuni(slogovi);
 
                 ugovor.setMenadzer(menadzer);
 
-                if (!listaUgovora.contains(ugovor)) {
-                    listaUgovora.add(ugovor);
-                }
+                listaUgovora.add(ugovor);
 
             }
 
@@ -570,12 +559,13 @@ public class DbRepositoryGeneric implements DbRepository<OpstiDomenskiObjekat> {
             } else {//kreiranje
                 jsonNovi = odo.toJson();
             }
-            
+
             java.util.Date datum = new java.util.Date();
             java.sql.Date datumSQL = new java.sql.Date(datum.getTime());
             String upit = "INSERT INTO history (vreme,menadzer,vrstaOperacije,objekatBaze,staraVrednost,novaVrednost) VALUES ('" + datumSQL + "','" + izvrsilac.getJmbg() + "','" + kljuc + "','" + odo.vratiImeKlase() + "','" + jsonStari + "','" + jsonNovi + "')";
+            System.out.println(upit);
             st = con.getConnection().createStatement();
-            
+
             st.executeUpdate(upit);
             st.close();
         } catch (SQLException ex) {

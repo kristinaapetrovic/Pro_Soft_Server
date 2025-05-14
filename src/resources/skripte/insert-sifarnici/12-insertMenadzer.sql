@@ -1,0 +1,2 @@
+INSERT INTO menadzer (jmbg, imePrezime, email, lozinka, datumRodjenja, aktivanNalog, prviLog) 
+VALUES ('1234567890123', 'Jovan Jovanović', 'admin@gmail.com', 'eN9AoHE6/2wa9k+jSlRsg/hCRhjM9oFPgOzrzeep6Fo=', '1985-05-10', TRUE, FALSE);
