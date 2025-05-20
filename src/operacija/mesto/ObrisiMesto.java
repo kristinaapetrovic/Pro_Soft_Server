@@ -21,7 +21,7 @@ public class ObrisiMesto extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.delete(objekat);
+        brokerGeneric.delete(objekat);
     }
     
 }

@@ -33,7 +33,7 @@ public class VratiListuVrstaAktivnosti extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
-        broker.readVrstaAktWithCondition(vakt, lista);
+        brokerSpecific.readVrstaAktWithCondition(vakt, lista);
     }
     
 }

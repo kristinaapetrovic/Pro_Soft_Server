@@ -19,7 +19,7 @@ public class KreirajAktivnost extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.add(objekat);
+        brokerGeneric.add(objekat);
     }
     
 }

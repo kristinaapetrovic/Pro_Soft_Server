@@ -28,7 +28,7 @@ public class VratiListuJeSponzor extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.readSponzorByProject((Projekat) objekat, lista);
+        brokerSpecific.readSponzorByProject((Projekat) objekat, lista);
     }
     
 }

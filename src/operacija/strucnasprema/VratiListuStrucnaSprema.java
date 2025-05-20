@@ -32,7 +32,7 @@ public class VratiListuStrucnaSprema extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
-        broker.readSSWithCondition(ss, lista);
+        brokerSpecific.readSSWithCondition(ss, lista);
     }
     
 }

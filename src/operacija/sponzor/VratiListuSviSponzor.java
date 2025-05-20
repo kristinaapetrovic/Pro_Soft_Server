@@ -28,7 +28,7 @@ public class VratiListuSviSponzor extends ApstraktnaGenerickaOperacija{
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
         
-        broker.readSponzorWithMesto(lista);
+        brokerSpecific.readSponzorWithMesto(lista);
         
     }
     

@@ -20,47 +20,31 @@ import model.VrstaAktivnosti;
  *
  * @author Korisnik
  */
-public interface Repository<T> {
-
-    List<T> getAll(T param) throws Exception;
-
-    void add(T param) throws Exception;
-
-    void edit(T param) throws Exception;
-
-    void delete(T param) throws Exception;
-
-    List<T> getAll();
-    
-    boolean existsInBD(T param);
-    
-    boolean isDeleted(T param);
+public interface RepositorySpecific {
     
     boolean readSponzorWithMesto(List<Sponzor> lista);
-    
+
     boolean readUgovor(List<Projekat> lista);
-    
+
     boolean readMestoWithCondition(Mesto mesto, List<Mesto> listaMesta);
-    
+
     boolean readVrstaAktWithCondition(VrstaAktivnosti vrstaAkt, List<VrstaAktivnosti> lista);
-    
+
     boolean readSSWithCondition(StrucnaSprema ss, List<StrucnaSprema> listaSS);
-    
+
     boolean readSponzorkWithCondition(Sponzor sponzor, List<Sponzor> lista);
-    
-    boolean readUgovorWithCondition(T param, List<Projekat> listaUgovora);
-    
+
+    boolean readUgovorWithCondition(OpstiDomenskiObjekat param, List<Projekat> listaUgovora);
+
     boolean readSSByM(List<StrucnaSprema> lista, Menadzer m);
-    
+
     boolean readAktByUg(Projekat pu, List<Aktivnost> lista);
-    
+
     boolean readMenWithCondition(Menadzer kriterijumMen, List<Menadzer> lista);
-    
+
     boolean readSponzorByProject(Projekat pu, List<JeSponzor> lista);
-    
+
     boolean readMSS(List<MSS> lista, Menadzer men);
-    
-    OpstiDomenskiObjekat readByPK(OpstiDomenskiObjekat odo);
-    
-    void history(Object object, String kljuc);
+
+    public boolean prijavi(Menadzer menadzer);
 }

@@ -34,7 +34,7 @@ public class VratiListuMSS extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
-        broker.readMSS(lista, men);
+        brokerSpecific.readMSS(lista, men);
      
     }
 

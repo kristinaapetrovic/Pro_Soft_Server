@@ -14,20 +14,21 @@ import operacija.ApstraktnaGenerickaOperacija;
  * @author Korisnik
  */
 public class VratiListuSviVrstaAktivnosti extends ApstraktnaGenerickaOperacija {
-    List<VrstaAktivnosti> lista=new ArrayList<>();
+
+    List<VrstaAktivnosti> lista = new ArrayList<>();
 
     public List<VrstaAktivnosti> getLista() {
         return lista;
     }
-    
+
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-   
+
     }
 
     @Override
-    protected void izvrsiOperaciju(Object objekat   ) throws Exception {
-        lista=broker.getAll(objekat   );
+    protected void izvrsiOperaciju(Object objekat) throws Exception {
+        lista = brokerGeneric.getAll(objekat);
     }
-    
+
 }

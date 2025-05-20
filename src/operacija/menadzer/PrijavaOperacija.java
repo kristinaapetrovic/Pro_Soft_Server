@@ -19,25 +19,22 @@ public class PrijavaOperacija extends ApstraktnaGenerickaOperacija {
     public Menadzer getUlogovani() {
         return ulogovani;
     }
-    
-    
+
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-        
+
     }
 
     @Override
-    protected void izvrsiOperaciju(Object objekat) throws Exception {
-        List<Menadzer> lista=broker.getAll((Menadzer) objekat);
-        
-        for(Menadzer men:lista){
-            if(men.isAktivanNalog() && men.getEmail().equals(((Menadzer)objekat).getEmail()) && men.getLozinka().equals(((Menadzer)objekat).getLozinka())){
-                ulogovani=men;
-                System.out.println(ulogovani.toString()+" "+ulogovani.getDatumRodjenja()+" "+ulogovani.getJmbg());
-                return;
-            }
+    protected void izvrsiOperaciju(Object objekat) throws Exception {        
+        Menadzer menadzer = (Menadzer) objekat;
+        boolean uspesno = brokerSpecific.prijavi(menadzer);
+        if (uspesno) {
+            ulogovani = menadzer;
+        } else {
+            ulogovani = null;
         }
-        ulogovani=null;
+
     }
 
 }

@@ -6,6 +6,7 @@ package operacija.projekat;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.OpstiDomenskiObjekat;
 import model.Projekat;
 import operacija.ApstraktnaGenerickaOperacija;
 
@@ -27,7 +28,7 @@ public class PretraziProjekat extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.readUgovorWithCondition(objekat, lista);
+        brokerSpecific.readUgovorWithCondition((OpstiDomenskiObjekat)objekat, lista);
     }
     
     

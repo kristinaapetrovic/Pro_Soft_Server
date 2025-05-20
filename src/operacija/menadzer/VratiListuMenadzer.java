@@ -34,7 +34,7 @@ public class VratiListuMenadzer extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.readMenWithCondition(menadzer, lista);
+        brokerSpecific.readMenWithCondition(menadzer, lista);
     }
     
     

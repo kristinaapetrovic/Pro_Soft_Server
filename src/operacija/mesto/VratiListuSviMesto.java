@@ -27,7 +27,7 @@ public class VratiListuSviMesto extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        lista=broker.getAll(objekat);
+        lista=brokerGeneric.getAll(objekat);
     }
     
 }

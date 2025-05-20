@@ -32,7 +32,7 @@ public class VratiListuSponzor extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
-        broker.readSponzorkWithCondition(sponzor, lista);
+        brokerSpecific.readSponzorkWithCondition(sponzor, lista);
     }
     
     

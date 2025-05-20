@@ -28,7 +28,7 @@ public class KreirajMenadzer extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-        if (broker.existsInBD(objekat) && !broker.isDeleted(objekat)) {
+        if (brokerGeneric.existsInBD(objekat) && !brokerGeneric.isDeleted(objekat)) {
             throw new Exception("Vec postoji objekat");
         }
     }
@@ -50,10 +50,10 @@ public class KreirajMenadzer extends ApstraktnaGenerickaOperacija {
         } catch (NoSuchAlgorithmException ex) {
             //todo
         }
-        if(broker.isDeleted(objekat)){
-            broker.edit(menadzer);
+        if(brokerGeneric.isDeleted(objekat)){
+            brokerGeneric.edit(menadzer);
         }else{
-            broker.add(menadzer);
+            brokerGeneric.add(menadzer);
         }
   
     }

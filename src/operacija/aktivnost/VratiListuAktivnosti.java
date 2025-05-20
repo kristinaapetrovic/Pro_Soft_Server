@@ -28,7 +28,7 @@ public class VratiListuAktivnosti extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.readAktByUg((Projekat) objekat, lista);
+        brokerSpecific.readAktByUg((Projekat) objekat, lista);
     }
     
 }

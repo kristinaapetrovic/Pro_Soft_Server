@@ -24,7 +24,7 @@ public class VratiListuSviProjekat extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object objekat ) throws Exception {
-        broker.readUgovor(lista);
+        brokerSpecific.readUgovor(lista);
     }
 
     public List<Projekat> getLista() {

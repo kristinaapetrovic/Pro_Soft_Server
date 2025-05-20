@@ -33,7 +33,7 @@ public class VratiListuMesto extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        broker.readMestoWithCondition(mesto, lista);
+        brokerSpecific.readMestoWithCondition(mesto, lista);
     }
     
     

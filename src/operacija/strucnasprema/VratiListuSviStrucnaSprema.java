@@ -28,7 +28,7 @@ public class VratiListuSviStrucnaSprema  extends ApstraktnaGenerickaOperacija{
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        lista=broker.getAll(objekat);
+        lista=brokerGeneric.getAll(objekat);
     }
     
 }

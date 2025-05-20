@@ -15,17 +15,17 @@ public class KreirajMesto extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void preduslovi(Object objekat) throws Exception {
-        if (broker.existsInBD(objekat) && !broker.isDeleted(objekat)) {
+        if (brokerGeneric.existsInBD(objekat) && !brokerGeneric.isDeleted(objekat)) {
             throw new Exception("Vec postoji objekat");
         }
     }
 
     @Override
     protected void izvrsiOperaciju(Object objekat) throws Exception {
-        if (broker.isDeleted(objekat)) {
-            broker.edit(objekat);
+        if (brokerGeneric.isDeleted(objekat)) {
+            brokerGeneric.edit(objekat);
         } else {
-            broker.add(objekat);
+            brokerGeneric.add(objekat);
         }
     }
 
